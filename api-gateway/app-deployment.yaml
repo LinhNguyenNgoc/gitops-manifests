@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway-service
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apigateway-service
+  template:
+    metadata:
+      labels:
+        app: apigateway-service
+    spec:
+      containers:
+      - name: apigateway-service
+        image: Innnguyen2795/apigateway-service:latest
+        ports:
+        - containerPort: 8080
