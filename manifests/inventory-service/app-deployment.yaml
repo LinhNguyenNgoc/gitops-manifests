@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: inventory-service
-        image: Innnguyen2795/inventory-service:latest
+        image: lnnguyen2795/inventory-service:latest
         ports:
         - containerPort: 8083
         env:
