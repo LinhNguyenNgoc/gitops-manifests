@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: lnnguyen2795/order-service:latest
+        image: lnnguyen2795/order-service:5
         ports:
         - containerPort: 8082
         env:

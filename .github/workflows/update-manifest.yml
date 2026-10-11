@@ -11,6 +11,8 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout GitOps repo
         uses: actions/checkout@v2
@@ -30,11 +32,11 @@ jobs:
           
           # Xác định thư mục ứng dụng dựa trên tên service
           # Ví dụ: order-service nằm trong thư mục order-service/app-deployment.yaml
-          FILE_PATH="$SERVICE_NAME/app-deployment.yaml"
+          FILE_PATH="manifests/$SERVICE_NAME/app-deployment.yaml"
           
           if [ -f "$FILE_PATH" ]; then
-            # Dùng sed để thay thế image tag cũ bằng tag mới (ví dụ: Innnguyen2795/order-service:12 -> Innnguyen2795/order-service:15)
-            sed -i "s|image: Innnguyen2795/$SERVICE_NAME:.*|image: Innnguyen2795/$SERVICE_NAME:$IMAGE_TAG|g" "$FILE_PATH"
+            # Dùng sed để thay thế image tag cũ bằng tag mới (ví dụ: lnnguyen2795/order-service:12 -> lnnguyen2795/order-service:15)
+            sed -i "s|image: lnnguyen2795/$SERVICE_NAME:.*|image: lnnguyen2795/$SERVICE_NAME:$IMAGE_TAG|g" "$FILE_PATH"
           else
             echo "File $FILE_PATH not found!"
             exit 1
