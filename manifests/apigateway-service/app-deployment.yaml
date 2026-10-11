@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: apigateway-service
-        image: lnnguyen2795/apigateway-service:5
+        image: lnnguyen2795/apigateway-service:6
         ports:
         - containerPort: 9000
         env:
