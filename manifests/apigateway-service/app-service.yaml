@@ -8,7 +8,5 @@ spec:
     app: apigateway-service
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
-      nodePort: 30080  # Cổng mở ra ngoài node (tuỳ chọn từ 30000-32767)
-  type: NodePort
+      port: 9000
+      targetPort: 9000

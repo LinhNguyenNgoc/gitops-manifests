@@ -17,4 +17,11 @@ spec:
       - name: apigateway-service
         image: lnnguyen2795/apigateway-service:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 9000
+        env:
+        - name: ORDER_SERVICE_URI
+          value: "http://order-service:8082"
+        - name: PAYMENT_SERVICE_URI
+          value: "http://payment-service:8084"
+        - name: INVENTORY_SERVICE_URI
+          value: "http://inventory-service:8083"
