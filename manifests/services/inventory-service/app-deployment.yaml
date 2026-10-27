@@ -12,10 +12,14 @@ spec:
     metadata:
       labels:
         app: inventory-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8083"
     spec:
       containers:
       - name: inventory-service
-        image: lnnguyen2795/inventory-service:3
+        image: lnnguyen2795/inventory-service:latest
         ports:
         - containerPort: 8083
         env:
@@ -25,3 +29,8 @@ spec:
           value: "postgres"
         - name: SPRING_DATASOURCE_PASSWORD
           value: "postgres"
+        # Bổ sung biến môi trường cho K8s:
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "kafka-service.microservices-ns.svc.cluster.local:9092"
+        - name: OTLP_TRACING_ENDPOINT
+          value: "http://tempo.microservices-ns.svc.cluster.local:4317"

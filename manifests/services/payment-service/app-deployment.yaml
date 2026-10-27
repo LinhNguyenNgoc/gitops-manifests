@@ -12,10 +12,14 @@ spec:
     metadata:
       labels:
         app: payment-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8084"
     spec:
       containers:
       - name: payment-service
-        image: lnnguyen2795/payment-service:3
+        image: lnnguyen2795/payment-service:latest
         ports:
         - containerPort: 8084
         env:
@@ -25,3 +29,8 @@ spec:
           value: "postgres"
         - name: SPRING_DATASOURCE_PASSWORD
           value: "postgres"
+        # Thêm các biến môi trường cho K8s tại đây:
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "kafka-service.microservices-ns.svc.cluster.local:9092"
+        - name: OTLP_TRACING_ENDPOINT
+          value: "http://tempo.microservices-ns.svc.cluster.local:4317"

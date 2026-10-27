@@ -12,10 +12,14 @@ spec:
     metadata:
       labels:
         app: order-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8082"
     spec:
       containers:
       - name: order-service
-        image: lnnguyen2795/order-service:5
+        image: lnnguyen2795/order-service:latest
         ports:
         - containerPort: 8082
         env:
@@ -25,3 +29,8 @@ spec:
           value: "postgres"
         - name: SPRING_DATASOURCE_PASSWORD
           value: "postgres"
+        # Bổ sung biến môi trường cho K8s:
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "kafka-service.microservices-ns.svc.cluster.local:9092"
+        - name: OTLP_TRACING_ENDPOINT
+          value: "http://tempo.microservices-ns.svc.cluster.local:4317"

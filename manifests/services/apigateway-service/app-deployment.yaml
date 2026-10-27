@@ -12,10 +12,14 @@ spec:
     metadata:
       labels:
         app: apigateway-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "9000"
     spec:
       containers:
       - name: apigateway-service
-        image: lnnguyen2795/apigateway-service:6
+        image: lnnguyen2795/apigateway-service:latest
         ports:
         - containerPort: 9000
         env:
@@ -25,3 +29,6 @@ spec:
           value: "http://payment-service:8084"
         - name: INVENTORY_SERVICE_URI
           value: "http://inventory-service:8083"
+        # Bổ sung biến môi trường trỏ tới Tempo trong K8s:
+        - name: OTLP_TRACING_ENDPOINT
+          value: "http://tempo.microservices-ns.svc.cluster.local:4317"
