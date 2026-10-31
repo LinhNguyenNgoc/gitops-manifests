@@ -29,8 +29,11 @@ spec:
           value: "postgres"
         - name: SPRING_DATASOURCE_PASSWORD
           value: "postgres"
-        # Bổ sung biến môi trường cho K8s:
         - name: KAFKA_BOOTSTRAP_SERVERS
           value: "kafka-service.microservices-ns.svc.cluster.local:9092"
+        # Cấu hình endpoint trỏ đến cổng HTTP 4318 của Tempo
         - name: OTLP_TRACING_ENDPOINT
-          value: "http://tempo.microservices-ns.svc.cluster.local:4317"
+          value: "http://tempo:4318/v1/traces"
+        # Ép giao thức exporter là HTTP để Agent không bị nhầm lẫn path
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: "http/protobuf"

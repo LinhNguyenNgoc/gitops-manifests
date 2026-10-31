@@ -29,6 +29,7 @@ spec:
           value: "http://payment-service:8084"
         - name: INVENTORY_SERVICE_URI
           value: "http://inventory-service:8083"
-        # Bổ sung biến môi trường trỏ tới Tempo trong K8s:
         - name: OTLP_TRACING_ENDPOINT
-          value: "http://tempo.microservices-ns.svc.cluster.local:4317"
+          value: "http://tempo:4318/v1/traces"
+        - name: MANAGEMENT_OTLP_TRACING_EXPORT_OTLP_ENDPOINT
+          value: "http://tempo:4318/v1/traces"

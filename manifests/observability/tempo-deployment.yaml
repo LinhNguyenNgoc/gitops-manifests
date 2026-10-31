@@ -45,6 +45,7 @@ spec:
         ports:
         - containerPort: 3200
         - containerPort: 4317
+        - containerPort: 4318   # <-- Đã bổ sung containerPort 4318 ở đây
         volumeMounts:
         - name: config
           mountPath: /etc/tempo.yaml
@@ -64,6 +65,9 @@ spec:
   - name: otlp-grpc
     port: 4317
     targetPort: 4317
+  - name: otlp-http     # <-- Đã bổ sung Service port 4318 ở đây
+    port: 4318
+    targetPort: 4318
   - name: http
     port: 3200
     targetPort: 3200

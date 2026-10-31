@@ -29,8 +29,11 @@ spec:
           value: "postgres"
         - name: SPRING_DATASOURCE_PASSWORD
           value: "postgres"
-        # Thêm các biến môi trường cho K8s tại đây:
         - name: KAFKA_BOOTSTRAP_SERVERS
           value: "kafka-service.microservices-ns.svc.cluster.local:9092"
+        
+        # --- ĐÃ CẬP NHẬT VÀ BỔ SUNG CHO TEMPO ---
         - name: OTLP_TRACING_ENDPOINT
-          value: "http://tempo.microservices-ns.svc.cluster.local:4317"
+          value: "http://tempo:4318/v1/traces"
+        - name: MANAGEMENT_OTLP_TRACING_EXPORT_OTLP_ENDPOINT
+          value: "http://tempo:4318/v1/traces"
